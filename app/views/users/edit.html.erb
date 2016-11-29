@@ -3,3 +3,13 @@
 <p>These are your current settings. Feel free to update them and click "submit"!</p>
 
 <!-- Needs form for email options -->
+<%= form_for edit_user_path, url: {action: "update"} do |f| %>
+  <%= f.text_field :name, :placeholder => "Your Name"  %>
+  <%= f.email_field :email, :placeholder => "Your Email"  %>
+  <%= check_box_tag(:receiveMarketing, "Sign me up!") %>
+  <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %>
+  <%= check_box_tag(:receiveArticles, "Sign me up!") %>
+  <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %>
+  <%= check_box_tag(:receiveDigest, "Sign me up!") %>
+  <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %>
+<% end %>

@@ -4,8 +4,28 @@ class UsersController < ApplicationController
   def index
   end
 
+  def search
+    @user_input = params[:q]
+    found_user = User.all.select{|user| user.email == @user_input}
+  end
+
+
+
+# mocks up search for user by email and token
+# def user_search(email, token)
+#   user = Token.consume(token)
+#   if user = nil
+#     flash[:error] = "Your account can not be validated."
+#   elsif user.email == params[:email]
+#     token = Token.generate(user)
+#     render edit_user_path
+#   else
+#     flash[:error] = "Your account can not be validated."
+#     redirect root_path
+    # end
+# end
   def edit
-    # get user
+
   end
 
   def update
@@ -35,19 +55,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # mocks up search for user by email and token
-  # def user_search(email, token)
-  #   user = Token.consume(token)
-  #   if user = nil
-  #     flash[:error] = "Your account can not be validated."
-  #   elsif user.email == params[:email]
-  #     token = Token.generate(user)
-  #     render edit_user_path
-  #   else
-  #     flash[:error] = "Your account can not be validated."
-  #     redirect root_path
-      # end
-  # end
+
 
   # ??? DO I NEED IF EMAIL MATCHES BUT TOKEN DOESNT
   # If the user tries to choose an email address which is already assigned to another user in the system, it should display an error.

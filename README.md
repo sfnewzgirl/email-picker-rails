@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Terminal Testing
 
-Things you may want to cover:
+```2.3.0 :004 > user_input = "johndoe@example.com"
+ => "johndoe@example.com"```
 
-* Ruby version
+```2.3.0 :005 > found_user = User.all.select{|user| user.email == user_input}
+  User Load (2.8ms)  SELECT "users".* FROM "users"```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ ```=> [#<User id: 1, email: "johndoe@example.com", name: "John Doe", receiveMarketing: true, receiveArticles: false, receiveDigest: true, created_at: "2016-11-29 21:55:29", updated_at: "2016-11-29 21:55:29">]
+2.3.0 :006 > ```

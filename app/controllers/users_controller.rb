@@ -6,10 +6,9 @@ class UsersController < ApplicationController
 
   def search
     @user_input = params[:q]
-    found_user = User.all.select{|user| user.email == @user_input}
+    @found_user = User.all.select{|user| user.email == @user_input}
+    redirect_to edit_user_path(@found_user)
   end
-
-
 
 # mocks up search for user by email and token
 # def user_search(email, token)
@@ -25,7 +24,10 @@ class UsersController < ApplicationController
     # end
 # end
   def edit
-
+    @user = Token.find(params[:user_id])
+    if @user.nil?
+      flash[:error] = "Something went wrong. Please try again."
+    end
   end
 
   def update

@@ -1,11 +1,11 @@
 <hr>
 <h3>Change Your Email Preferences</h3>
+<h3><%= @user.name %></h3>
 <p>These are your current settings. Feel free to update them and click "submit"!</p>
 
 <!-- Needs form for email options -->
 <%= form_for edit_user_path, url: {action: "update"} do |f| %>
-  <%= f.text_field :name, :placeholder => "Your Name"  %>
-  <%= f.email_field :email, :placeholder => "Your Email"  %><br>
+  <%= f.email_field :email, :placeholder => @user.email  %><br>
   <%= check_box_tag(:receiveMarketing, "Sign me up!") %>
   <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
   <%= check_box_tag(:receiveArticles, "Sign me up!") %>

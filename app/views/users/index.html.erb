@@ -6,5 +6,5 @@
 <%= form_tag(root_path, method: "get", :authenticity_token => true) do %>
   <%= label_tag(:q, "Enter Your Email Address:") %>
   <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
+  <%= submit_tag "Search", :name => nil %>
 <% end %>

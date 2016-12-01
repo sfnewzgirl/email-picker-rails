@@ -20,14 +20,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by(email: params[:email])
 
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by(email: params[:email])
   end
 
   def update
-    @user = User.find_by(params[:id])
+    @user = User.find_by(email: params[:email])
     if @user.update(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
       redirect_to root_path

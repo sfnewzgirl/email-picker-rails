@@ -2,7 +2,6 @@ class Token < ApplicationRecord
   belongs_to :user
 
   def self.generate(user)
-    #find user
     token = Token.new(:user_id => user.id, :nonce => SecureRandom.uuid)
     token.save
   end

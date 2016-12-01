@@ -44,5 +44,9 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :receiveMarketing, :receiveArticles, :receiveDigest)
     end
+
+    def token_params
+      params.require(:token).permit(:user_id, :nonce)
+    end
   end
 end

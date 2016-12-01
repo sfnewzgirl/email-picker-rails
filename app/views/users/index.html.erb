@@ -3,7 +3,7 @@
 <p>Let's start by pulling up your current email settings.</p>
 
 <!-- search form -->
-<%= form_tag(root_path, method: "get", :authenticity_token => true) do %>
+<%= form_tag(root_path, method: "get") do %>
   <%= label_tag(:q, "Enter Your Email Address:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag "Search", :name => nil %>

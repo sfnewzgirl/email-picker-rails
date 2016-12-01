@@ -2,6 +2,8 @@
 
 ### Terminal Testing
 
+Email search bar:
+
 ```2.3.0 :004 > user_input = "johndoe@example.com"
  => "johndoe@example.com"```
 

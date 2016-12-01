@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @users = User.all
     @user_input = params[:q]
     @found_user = User.all.select{|user| user.email == @user_input}
+    redirect_to action: "edit", name: @found_user.name
   end
 
   def new

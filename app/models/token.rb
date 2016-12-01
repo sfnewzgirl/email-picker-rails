@@ -6,7 +6,7 @@ class Token < ApplicationRecord
     token.save
   end
 
-  def consume(token)
+  def self.consume(token)
     found_token = Token.find_by(nonce:  token.nonce)
     if found_token
       set_user_id = found_token.user_id

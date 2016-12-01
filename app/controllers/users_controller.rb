@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @user_input = params[:q]
+    @found_user = User.all.select{|user| user.email == @user_input}
   end
 
   def new
@@ -23,10 +25,7 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
 
   def edit
-    @user_input = params[:q]
-    found_user = User.all.select{|user| user.email == @user_input}
-    @found_user = User.all.select{|user| user.email == @user_input}
-    redirect_to edit_user_path(@found_user)
+    @user = User.find_by(email: params[:email])
   end
 
   def update

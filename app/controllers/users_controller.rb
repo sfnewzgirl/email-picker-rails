@@ -4,7 +4,8 @@ class UsersController < ApplicationController
     @users = User.all
     @user_input = params[:q]
     @found_user = User.all.select{|user| user.email == @user_input}
-    redirect_to action: "edit", name: @found_user.name
+    #add in here and and a token true
+    #deleted redirect_to
   end
 
   def new
@@ -26,11 +27,13 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
 
   def edit
-    @user = User.find_by(email: params[:email])
+    user_name = params[:name]
+    @user = User.find_by(name: user_name)
   end
 
   def update
-    @user = User.find_by(email: params[:email])
+    user_name = params[:name]
+    @user = User.find_by(name: user_name)
     if @user.update(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
       redirect_to root_path

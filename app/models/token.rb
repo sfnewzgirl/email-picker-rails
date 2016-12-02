@@ -4,6 +4,7 @@ class Token < ApplicationRecord
 
   def self.generate(user)
     token = Token.new(:user_id => user.id, :nonce => SecureRandom.uuid)
+    # TODO add check for unique nonce
     token.save
     token
   end

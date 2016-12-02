@@ -25,9 +25,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+  end
 
   def edit
-    @user = User.find_by_id(params[:id])
+    user_id = params[:id]
+    puts user_id
+    puts "THIS IS MY TEST"
+    @user = User.find_by_id(user_id)
   end
 
   def update
@@ -43,12 +47,12 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :receiveMarketing, :receiveArticles, :receiveDigest)
-    end
-
-    def token_params
-      params.require(:token).permit(:user_id, :nonce)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :receiveMarketing, :receiveArticles, :receiveDigest)
   end
+
+  def token_params
+    params.require(:token).permit(:user_id, :nonce)
+  end
+
 end

@@ -11,5 +11,7 @@
   <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
   <%= f.check_box :receiveDigest %>
   <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
+  <%= check_box_tag 'opt_out'  %>
+  <%= label_tag("I do not want to receive any emails.") %><br>
   <%= f.submit "Save Changes", :class => 'button', :id => "edit_btn" %>
 <% end %>

@@ -1,3 +1,17 @@
 <hr>
 <h3>Change Your Email Preferences</h3>
 <p>These are your current settings. Feel free to update them and click "submit"!</p>
+
+<!-- Needs checkbox for no email option -->
+<%= form_for @user, url: edit_user_path, method: "patch" do |f| %>
+  <%= f.email_field :email, :placeholder => @user.email  %><br>
+  <%= check_box_tag(:receiveMarketing) %>
+  <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
+  <%= check_box_tag(:receiveArticles) %>
+  <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
+  <%= check_box_tag(:receiveDigest) %>
+  <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
+  <%= check_box_tag(:receiveNone) %>
+  <%= label_tag(:receiveNone, "I do not want to receive any emails.") %><br>
+  <%= f.submit "Save Changes", :class => 'button', :id => "edit_btn" %>
+<% end %>

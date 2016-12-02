@@ -3,15 +3,15 @@
 <p>These are your current settings. Feel free to update them and click "submit"!</p>
 
 <!-- Needs checkbox for no email option -->
-<%= form_for @user, url: edit_user_path, method: "patch" do |f| %>
+<%= form_for @user, url: '/users/' + @user.id.to_s, method: "patch" do |f| %>
   <%= f.email_field :email, :placeholder => @user.email  %><br>
-  <%= f.check_box :receiveMarketing %>
+  <%= f.check_box :receiveMarketing, :id => "checkbox" %>
   <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
-  <%= f.check_box :receiveArticles %>
+  <%= f.check_box :receiveArticles, :id => "checkbox" %>
   <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
-  <%= f.check_box :receiveDigest %>
+  <%= f.check_box :receiveDigest, :id => "checkbox" %>
   <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
-  <%= radio_button_tag("opt_out", "true")%>
-  <%= label_tag("Do not email. I do not want to receive any emails.") %><br>
+  <%= radio_button_tag("opt_out", true)%>
+  <%= label_tag("Do not email me.") %><br>
   <%= f.submit "Save Changes", :class => 'button', :id => "edit_btn" %>
 <% end %>

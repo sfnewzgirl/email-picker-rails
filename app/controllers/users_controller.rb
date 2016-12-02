@@ -8,19 +8,11 @@ class UsersController < ApplicationController
     # redirect_to edit_user_path(@user)
   end
 
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:alert] = 'Your profile has been saved.'
-      redirect_to edit_user_path
-    else
-      flash[:error] = 'Something went wrong. Please try again.'
-      redirect_to root_path
-    end
+  def query
+    email = params[:email]
+    nonce = params[:token]
+    puts email
+    puts nonce
   end
 
   def show
@@ -29,14 +21,13 @@ class UsersController < ApplicationController
 
   def edit
     user_id = params[:id]
-    puts user_id
-    puts "THIS IS MY TEST"
     @user = User.find_by_id(user_id)
   end
 
   def update
-    @user = User.find_by_id(params[:id])
-    if @user.update(user_params)
+    user_id = params[:id]
+    @user = User.find_by_id(user_id)
+    if @user.update_attributes(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
       redirect_to root_path
     else

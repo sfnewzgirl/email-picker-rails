@@ -1,4 +1,12 @@
-# README
+# Email Picker
+
+### Objective
+
+Create an app that allows a user to change their emails preferences using a token model that for user credentials.
+
+#### A note about pretty urls
+
+In the interest of the exercise and user model attributes I did not choose to use pretty urls though I would prefer to normally.
 
 ### Terminal Testing
 

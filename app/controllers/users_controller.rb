@@ -27,8 +27,7 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
 
   def edit
-    user_name = params[:name]
-    @user = User.find_by(name: user_name)
+    @user = User.find_by(email: params[:email])
   end
 
   def update

@@ -1,9 +1,11 @@
 class Token < ApplicationRecord
   belongs_to :user
+  validates :nonce, presence: true, uniqueness: true
 
   def self.generate(user)
     token = Token.new(:user_id => user.id, :nonce => SecureRandom.uuid)
     token.save
+    token
   end
 
   def self.consume(token)

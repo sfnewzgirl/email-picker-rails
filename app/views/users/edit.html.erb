@@ -1,3 +1,9 @@
+<% if flash[:error] %>
+  <%= flash[:error] %></div>
+<% end %>
+<% if flash[:notice] %>
+  <%= flash[:notice] %></div>
+<% end %>
 <hr>
 <h3>Change Your Email Preferences</h3>
 <p>These are your current settings. Feel free to update them and click "submit"!</p>

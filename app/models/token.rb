@@ -9,13 +9,13 @@ class Token < ApplicationRecord
     token
   end
 
-  def self.consume(token)
-    found_token = Token.find_by(nonce:  token.nonce)
+  def self.consume(nonce)
+    found_token = Token.find_by(nonce:  nonce)
     if found_token
       set_user_id = found_token.user_id
       token_retrieved_user = User.find_by(:id => set_user_id)
+      found_token.destroy
       token_retrieved_user
-      token.destroy
     else
       nil
     end

@@ -1,45 +1,52 @@
 class UsersController < ApplicationController
 
-  def index
-    @users = User.all
-    @user_input = params[:q]
-    @found_user = User.all.select{|user| user.email == @user_input}
-    #add in here and and a token true
-    # redirect_to edit_user_path(@user)
-  end
-
   def query
     email = params[:email]
     nonce = params[:token]
-    puts email
-    puts nonce
-  end
-
-  def show
-    @user = User.find_by_id(params[:id])
+    user = User.find_by(:email == email)
+    token_user = Token.consume(nonce)
+    if user && token_user && user.id == token_user.id
+      redirect_to edit_user_path(user)
+    else
+      flash[:error] = 'User not found.'
+    end
   end
 
   def edit
     user_id = params[:id]
     @user = User.find_by_id(user_id)
+    @token = Token.generate(@user)
+    puts "EDIT!!!"
+    puts @token.inspect
+    puts @user.inspect
   end
 
   def update
-    user_id = params[:id]
-    @user = User.find_by_id(user_id)
-    if @user.update_attributes(user_params)
+    email = params[:email]
+    nonce = params[:token]
+    puts email
+    puts nonce
+    user = User.find_by(:email => email)
+    token_user = Token.consume(nonce)
+    puts user.inspect
+    puts token_user.inspect
+    if user && token_user && user.id == token_user.id
+      puts "you win"
+      puts params
+      user.update_attributes(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
-      redirect_to root_path
+      redirect_to edit_user_path(user)
     else
-      flash[:notice] = 'Something went wrong. Please try again.'
-      redirect_to edit_user_path(@user)
+      puts "you lose"
+      flash[:error] = 'User not found.'
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :receiveMarketing, :receiveArticles, :receiveDigest)
+    user_attributes = params.permit(:name, :receiveMarketing, :receiveArticles, :receiveDigest)
+    user_params = user_attributes.merge({email: params[:new_email], receiveMarketing: !!params[:receiveMarketing], receiveArticles: !!params[:receiveArticles], receiveDigest: !!params[:receiveDigest]})
   end
 
   def token_params

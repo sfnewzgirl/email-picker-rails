@@ -3,15 +3,17 @@
 <p>These are your current settings. Feel free to update them and click "submit"!</p>
 
 <!-- Needs checkbox for no email option -->
-<%= form_for @user, url: '/users/' + @user.id.to_s, method: "patch" do |f| %>
-  <%= f.email_field :email, :placeholder => @user.email  %><br>
-  <%= f.check_box :receiveMarketing, :id => "checkbox" %>
+<%= form_tag(update_user_path, :method => "patch") do %>
+  <%= hidden_field_tag 'email', @user.email %>
+  <%= hidden_field_tag 'token', @token.nonce %>
+  <%= email_field_tag 'new_email', @user.email %><br>
+  <%= check_box_tag 'receiveMarketing', '1', @user.receiveMarketing %>
   <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
-  <%= f.check_box :receiveArticles, :id => "checkbox" %>
+  <%= check_box_tag 'receiveArticles', '1', @user.receiveArticles %>
   <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
-  <%= f.check_box :receiveDigest, :id => "checkbox" %>
+  <%= check_box_tag 'receiveDigest', '1', @user.receiveDigest %>
   <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
   <%= radio_button_tag("opt_out", true)%>
   <%= label_tag("Do not email me.") %><br>
-  <%= f.submit "Save Changes", :class => 'button', :id => "edit_btn" %>
+  <%= submit_tag "Save Changes", class: "form_submit" %>
 <% end %>

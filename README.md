@@ -8,6 +8,10 @@ Create an app that allows a user to change their emails preferences using a toke
 
 In the interest of the exercise and user model attributes I did not choose to use pretty urls though I would prefer to normally.
 
+#### A note about token generation
+
+# TODO add check for unique nonce
+
 ### Terminal Testing
 
 #### Email search bar:

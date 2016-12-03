@@ -3,9 +3,14 @@ $(document).on('turbolinks:load',
     console.log('Sanity check: turbolinks has loaded users.js.');
 
   jQuery('#opt_out_true').on('click', function (event) {
-    console.log('opt out button clicked');
     if ($('#opt_out_true').val()) {
-      $('input[type="checkbox"]').attr('checked', false);
+      $('input[type="checkbox"]').prop('checked', false);
+    }
+  })
+
+  $('input[type="checkbox"]').on('click', function(event) {
+    if ($(this).prop('checked')) {
+      $('#opt_out_true').prop('checked', false);
     }
   })
 

@@ -12,6 +12,12 @@
     <%= image_tag("TheInformationLogo.png", :alt => "The Information") %>
     <h1>Welcome!</h1>
     <h3>Email is a critical communications channel for <span>The Information</span>. We want our subscribers to have control of when they hear from us and what kind of emails they receive.</h3>
+    <% if flash[:error] %>
+    <%= flash[:error] %></div>
+  <% end %>
+  <% if flash[:notice] %>
+    <%= flash[:notice] %></div>
+  <% end %>
     <%= yield %>
   </body>
 </html>

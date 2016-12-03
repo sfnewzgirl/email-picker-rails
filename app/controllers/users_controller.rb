@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     user = User.find_by(:email == email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
+      puts user
       redirect_to edit_user_path(user)
     else
       flash[:error] = 'User not found.'

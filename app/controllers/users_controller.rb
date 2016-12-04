@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     user = User.find_by(:email == email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
-      puts user
+
       redirect_to edit_user_path(user)
     else
       flash[:error] = 'User not found.'
@@ -22,12 +22,20 @@ class UsersController < ApplicationController
   def update
     email = params[:email]
     nonce = params[:token]
+    new_email = params[:new_email]
     user = User.find_by(:email => email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
+      if email != new_email
+        email_user = User.find_by(email: new_email)
+        if email_user
+          flash[:error] = 'This email is already in use. Please choose another email address.'
+          return redirect_to edit_user_path(user)
+        end
+      end
       user.update_attributes(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
-      redirect_to edit_user_path(user)
+      return redirect_to edit_user_path(user)
     else
       flash[:error] = 'User not found.'
     end

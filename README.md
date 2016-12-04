@@ -1,30 +1,22 @@
 # Email Picker
 
-### Objective
+## Objective
 
-Create an app that allows a user to change their emails preferences using a token model that for user credentials.
+Create a Ruby on Rails app that allows a user to change their emails preferences and use a token model for user credentials.
+
+#### A note about scope
+
+The scope of this project is limited to a user's ability to change their email preferences after a user and corresponding token have been confirmed.
 
 #### A note about pretty urls
 
-In the interest of the exercise and user model attributes I did not choose to use pretty urls though I would prefer to normally.
+In the interest of the exercise and timeline I did not choose to use pretty urls though I would in a larger, production level app.
 
-#### A note about token generation
+## Terminal Testing
 
-# TODO add check for unique nonce
+I used the rails console to test lines of code as I constructed two methods I needed for my token model.
 
-### Terminal Testing
-
-#### Email search bar:
-
-2.3.0 :004 > user_input = "johndoe@example.com"
-=> "johndoe@example.com"
-
-2.3.0 :005 > found_user = User.all.select{|user| user.email == user_input}
-  User Load (2.8ms)  SELECT "users".* FROM "users"
-
-=> User id: 1, email: "johndoe@example.com", name: "John Doe", receiveMarketing: true, receiveArticles: false, receiveDigest: true, created_at: "2016-11-29 21:55:29", updated_at: "2016-11-29 21:55:29"
-
-#### Token generate:
+##### Token generate:
 
 2.3.0 :027 > new_user = User.create(email: "susandoe@example.com", name: "Susan Doe", recei
 veMarketing: false, receiveArticles: false, receiveDigest: false)
@@ -38,7 +30,7 @@ SQL (0.4ms)  INSERT INTO "tokens" ("nonce", "user_id", "created_at", "updated_at
 
 => Token id: 4, nonce: "531d75a1-205a-4d93-9a31-eaa2aef86860", user_id: 4, created_at: "2016-12-01 19:01:15", updated_at: "2016-12-01 19:01:15"
 
-#### Token consume:
+##### Token consume:
 
 2.3.0 :001 > token = Token.find_by_id(1)
   Token Load (0.2ms)  SELECT  "tokens".* FROM "tokens" WHERE "tokens"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]

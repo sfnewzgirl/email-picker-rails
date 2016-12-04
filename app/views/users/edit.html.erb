@@ -1,26 +1,34 @@
-<% if flash[:error] %>
-  <%= flash[:error] %></div>
-<% end %>
-<% if flash[:notice] %>
-  <%= flash[:notice] %></div>
-<% end %>
-<hr>
-<h3>Change Your Email Preferences</h3>
-<p>These are your current settings. Feel free to update them and click "submit"!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-2  col-sm-12">
+      <p>
+        <% if flash[:error] %>
+          <div class="error"><%= flash[:error] %></div>
+        <% end %>
+        <% if flash[:notice] %>
+          <div class="notice"><%= flash[:notice] %></div>
+        <% end %>
+      </p>
+      <hr>
+      <h3>Change Your Email Preferences</h3>
+      <p>These are your current settings. Feel free to update them and click "submit"!</p>
 
-<!-- Needs checkbox for no email option -->
-<%= form_tag(update_user_path, :method => "patch") do %>
-  <%= hidden_field_tag 'email', @user.email %>
-  <%= hidden_field_tag 'token', @token.nonce %>
-  <%= label_tag('new_email', "Email Address:") %>
-  <%= email_field_tag 'new_email', @user.email %><br>
-  <%= check_box_tag 'receiveMarketing', '1', @user.receiveMarketing %>
-  <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
-  <%= check_box_tag 'receiveArticles', '1', @user.receiveArticles %>
-  <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
-  <%= check_box_tag 'receiveDigest', '1', @user.receiveDigest %>
-  <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
-  <%= radio_button_tag("opt_out", true)%>
-  <%= label_tag("Do not email me.") %><br>
-  <%= submit_tag "Save Changes", class: "form_submit" %>
-<% end %>
+      <!-- Needs checkbox for no email option -->
+      <%= form_tag(update_user_path, :method => "patch") do %>
+        <%= hidden_field_tag 'email', @user.email %>
+        <%= hidden_field_tag 'token', @token.nonce %>
+        <%= label_tag('new_email', "Email Address:") %>
+        <%= email_field_tag 'new_email', @user.email %><br>
+        <%= check_box_tag 'receiveMarketing', '1', @user.receiveMarketing %>
+        <%= label_tag(:receiveMarketing, "I would like to receive special offers from The Information.") %><br>
+        <%= check_box_tag 'receiveArticles', '1', @user.receiveArticles %>
+        <%= label_tag(:receiveArticles, "I would like to receive an email when a new article is published.") %><br>
+        <%= check_box_tag 'receiveDigest', '1', @user.receiveDigest %>
+        <%= label_tag(:receiveDigest, "I would like to receive a digest of the week's news every Saturday.") %><br>
+        <%= radio_button_tag("opt_out", true)%>
+        <%= label_tag("Do not email me.") %><br>
+        <%= submit_tag "Save Changes", class: "form_submit" %>
+      <% end %>
+    </div>
+  </div>
+</div>

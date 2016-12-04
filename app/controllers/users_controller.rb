@@ -17,28 +17,18 @@ class UsersController < ApplicationController
     user_id = params[:id]
     @user = User.find_by_id(user_id)
     @token = Token.generate(@user)
-    puts "EDIT!!!"
-    puts @token.inspect
-    puts @user.inspect
   end
 
   def update
     email = params[:email]
     nonce = params[:token]
-    puts email
-    puts nonce
     user = User.find_by(:email => email)
     token_user = Token.consume(nonce)
-    puts user.inspect
-    puts token_user.inspect
     if user && token_user && user.id == token_user.id
-      puts "you win"
-      puts params
       user.update_attributes(user_params)
       flash[:notice] = 'Your email preferences have been saved.'
       redirect_to edit_user_path(user)
     else
-      puts "you lose"
       flash[:error] = 'User not found.'
     end
   end

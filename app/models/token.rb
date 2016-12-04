@@ -10,7 +10,7 @@ class Token < ApplicationRecord
   end
 
   def self.consume(nonce)
-    found_token = Token.find_by(nonce:  nonce)
+    found_token = Token.find_by(nonce: nonce)
     if found_token
       set_user_id = found_token.user_id
       token_retrieved_user = User.find_by(:id => set_user_id)

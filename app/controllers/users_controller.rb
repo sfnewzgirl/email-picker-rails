@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     user = User.find_by(:email == email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
-
       redirect_to edit_user_path(user)
     else
       flash[:error] = 'User not found.'
@@ -46,10 +45,6 @@ class UsersController < ApplicationController
   def user_params
     user_attributes = params.permit(:name, :receiveMarketing, :receiveArticles, :receiveDigest)
     user_params = user_attributes.merge({email: params[:new_email], receiveMarketing: !!params[:receiveMarketing], receiveArticles: !!params[:receiveArticles], receiveDigest: !!params[:receiveDigest]})
-  end
-
-  def token_params
-    params.require(:token).permit(:user_id, :nonce)
   end
 
 end

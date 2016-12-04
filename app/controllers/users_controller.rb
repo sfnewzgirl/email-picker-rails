@@ -11,9 +11,6 @@ class UsersController < ApplicationController
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
       redirect_to edit_user_path(user)
-    else
-      puts token_user.inspect
-      puts user.inspect
     end
   end
 
@@ -33,7 +30,7 @@ class UsersController < ApplicationController
       if email != new_email
         email_user = User.find_by(email: new_email)
         if email_user
-          flash[:error] = 'This email is already in use. Please choose another email address.'
+          flash[:error] = 'That email is already in use. Please choose another email address.'
           return redirect_to edit_user_path(user)
         end
       end

@@ -5,7 +5,7 @@ class Token < ApplicationRecord
   def self.generate(user)
     while true
       nonce = SecureRandom.uuid
-      token_search = Token.find_by(:nonce => nonce)
+      token_search = Token.find_by(nonce: nonce)
       if token_search == nil
         break
       end
@@ -17,7 +17,7 @@ class Token < ApplicationRecord
     found_token = Token.find_by(nonce: nonce)
     if found_token
       set_user_id = found_token.user_id
-      token_retrieved_user = User.find_by(:id => set_user_id)
+      token_retrieved_user = User.find_by(id: set_user_id)
       found_token.destroy
       token_retrieved_user
     else

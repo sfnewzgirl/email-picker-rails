@@ -16,7 +16,25 @@
           <h3>Email is a critical communications channel for <span>The Information</span>. We want our subscribers to have control of when they hear from us and what kind of emails they receive.</h3>
         </div>
       </div>
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-sm-12">
+      <p>
+        <% if flash[:error] %>
+          <div class="alert alert-<%= bootstrap_class_for(:error) %> fade in">
+          <button class="close" data-dismiss="alert">×</button>
+            <p class="notice"><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <% if flash[:notice] %>
+          <div class="alert alert-<%= bootstrap_class_for(:notice) %> fade in">
+          <button class="close" data-dismiss="alert">×</button>
+            <p class="notice"><%= flash[:notice] %><p>
+          </div>
+        <% end %>
+      </p>
     </div>
+  </div>
+</div>
     <%= yield %>
   </body>
 </html>

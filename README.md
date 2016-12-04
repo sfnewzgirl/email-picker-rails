@@ -12,6 +12,10 @@ The scope of this project is limited to a user's ability to change their email p
 
 In the interest of the exercise and timeline I did not choose to use pretty urls though I would in a larger, production level app.
 
+#### A note about unique nonces
+
+timeing issue because lookg up and save are separate but good first step 
+
 ## Terminal Testing
 
 I used the rails console to test lines of code as I constructed two methods I needed for my token model.
@@ -86,3 +90,14 @@ SQL (0.4ms)  INSERT INTO "tokens" ("nonce", "user_id", "created_at", "updated_at
    Token Load (0.2ms)  SELECT  "tokens".* FROM "tokens" WHERE "tokens"."nonce" = ? LIMIT ?  [["nonce", "775bc785-d7d0-441f-b324-7d48157ec980"], ["LIMIT", 1]]
 
   => nil
+
+### A question about???
+
+multiple toeksn outstanding ... what's the preferred approach
+ a user ends up with multiple tokens
+
+def edit
+  user_id = params[:id]
+  @user = User.find_by_id(user_id)
+  @token = Token.generate(@user)
+end

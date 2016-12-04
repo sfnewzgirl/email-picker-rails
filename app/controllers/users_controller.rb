@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   def query
     email = params[:email]
     nonce = params[:token]
-    user = User.find_by(:email == email)
+    user = User.find_by(email: email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
       redirect_to edit_user_path(user)
+    else
+      puts token_user.inspect
+      puts user.inspect
     end
   end
 
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
     email = params[:email]
     nonce = params[:token]
     new_email = params[:new_email]
-    user = User.find_by(:email => email)
+    user = User.find_by(email: email)
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
       if email != new_email

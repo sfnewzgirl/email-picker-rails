@@ -3,10 +3,14 @@ class Token < ApplicationRecord
   validates :nonce, presence: true, uniqueness: true
 
   def self.generate(user)
-    token = Token.new(:user_id => user.id, :nonce => SecureRandom.uuid)
-    # TODO add check for unique nonce
-    token.save
-    token
+    while true
+      nonce = SecureRandom.uuid
+      token_search = Token.find_by(:nonce => nonce)
+      if token_search == nil
+        break
+      end
+    end
+    Token.create(:user_id => user.id, :nonce => nonce)
   end
 
   def self.consume(nonce)

@@ -2,19 +2,15 @@
 
 ## Objective
 
-Create a Ruby on Rails app that allows a user to change their emails preferences and use a token model for user credentials.
+Create a Ruby on Rails app that allows a user to change their emails preferences while using a token model for user credentials.
 
 #### A note about scope
 
-The scope of this project is limited to a user's ability to change their email preferences after a user and corresponding token have been confirmed.
+The scope of this project is limited to the necessary route, controller and views to allow a user to change their email preferences after the user and corresponding token have been confirmed.
 
 #### A note about pretty urls
 
 In the interest of the exercise and timeline I did not choose to use pretty urls though I would in a larger, production level app.
-
-#### A note about unique nonces
-
-timeing issue because lookg up and save are separate but good first step 
 
 ## Terminal Testing
 
@@ -33,6 +29,10 @@ SQL (0.4ms)  INSERT INTO "tokens" ("nonce", "user_id", "created_at", "updated_at
  (4.5ms)  commit transaction
 
 => Token id: 4, nonce: "531d75a1-205a-4d93-9a31-eaa2aef86860", user_id: 4, created_at: "2016-12-01 19:01:15", updated_at: "2016-12-01 19:01:15"
+
+#### A note about unique nonces
+
+Token.generate currently does a look up to see if a matching nonce has already been created before saving the newly generated nonce. I recognize that there is a timing issue with this approach since the look up and save do not happen simultaneously. However, for the scope of this project I felt like this is a good first step of preventing randomly generated, matching nonce's from getting created.
 
 ##### Token consume:
 
@@ -91,13 +91,14 @@ SQL (0.4ms)  INSERT INTO "tokens" ("nonce", "user_id", "created_at", "updated_at
 
   => nil
 
-### A question about???
+### A question about multiple tokens
 
-multiple toeksn outstanding ... what's the preferred approach
- a user ends up with multiple tokens
+This approach generates multiple valid tokens for each user. In some cases it might be best to restrict each user to one outstanding token. I'm curious about the preferred approach to this?
 
+```
 def edit
   user_id = params[:id]
   @user = User.find_by_id(user_id)
   @token = Token.generate(@user)
 end
+```

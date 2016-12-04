@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-2 col-sm-12">
+    <div class="col-lg-6 offset-lg-3 col-sm-12">
       <p>
         <% if flash[:error] %>
           <div class="error"><%= flash[:error] %></div>
@@ -11,7 +11,10 @@
       </p>
       <hr>
       <h3>Let's start by pulling up your current email settings.</h3>
-      <p>For example: http://localhost:3000/users/query?email=johndoe@example.com&token=e152cd41-60ad-413a-8ac4-b38fb1977cab</p>
+      <p>You can query a user's account with their email and token nonce.<p>
+      <p>For example:</p><br>
+      <p>
+      http://localhost:3000/users/query?email=johndoe@example.com&token=e152cd41-60ad-413a-8ac4-b38fb1977cab</p>
       <p>
       http://localhost:3000/users/query?email=janedoe@example.com&token=775bc785-d7d0-441f-b324-7d48157ec980</p>
     </div>

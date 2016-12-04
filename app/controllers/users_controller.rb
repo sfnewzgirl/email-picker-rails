@@ -7,8 +7,6 @@ class UsersController < ApplicationController
     token_user = Token.consume(nonce)
     if user && token_user && user.id == token_user.id
       redirect_to edit_user_path(user)
-    else
-      flash[:error] = 'User not found.'
     end
   end
 
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
         end
       end
       user.update_attributes(user_params)
-      flash[:notice] = 'Your email preferences have been saved.'
+      flash[:notice] = 'Your changes have been saved.'
       return redirect_to edit_user_path(user)
     else
       flash[:error] = 'User not found.'

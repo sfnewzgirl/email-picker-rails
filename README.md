@@ -1,12 +1,13 @@
 # Email Picker
+### Misha LeClair
 
 ## Objective
 
-Create a Ruby on Rails app that allows a user to change their emails preferences while using a token model for user credentials.
+Create a Ruby on Rails app that allows a user to change their email preferences while using a token model for user credentials.
 
 #### A note about scope
 
-The scope of this project is limited to the necessary route, controller and views to allow a user to change their email preferences after the user and corresponding token have been confirmed.
+The scope of this project is limited to the route, controller and views needed to allow a user to change their email preferences after the user and corresponding token have been confirmed.
 
 #### A note about pretty urls
 
@@ -14,12 +15,11 @@ In the interest of the exercise and timeline I did not choose to use pretty urls
 
 ## Terminal Testing
 
-I used the rails console to test lines of code as I constructed two methods I needed for my token model.
+I used the rails console to test lines of code as I constructed the methods I needed for my token model.
 
 ##### Token generate:
 
-2.3.0 :027 > new_user = User.create(email: "susandoe@example.com", name: "Susan Doe", recei
-veMarketing: false, receiveArticles: false, receiveDigest: false)
+2.3.0 :027 > new_user = User.create(email: "susandoe@example.com", name: "Susan Doe", receiveMarketing: false, receiveArticles: false, receiveDigest: false)
 
 2.3.0 :029 > next_token = Token.create(:user_id => new_user.id, :nonce => SecureRandom.uuid
 )
@@ -32,7 +32,7 @@ SQL (0.4ms)  INSERT INTO "tokens" ("nonce", "user_id", "created_at", "updated_at
 
 #### A note about unique nonces
 
-Token.generate currently does a look up to see if a matching nonce has already been created before saving the newly generated nonce. I recognize that there is a timing issue with this approach since the look up and save do not happen simultaneously. However, for the scope of this project I felt like this is a good first step of preventing randomly generated, matching nonce's from getting created.
+I used a UUID as a first step to crete unique nonces. Token.generate currently does a search to see if a matching nonce has already been created before saving the newly generated nonce. This is a good first step to prevent randomly generated, matching nonces from getting created. However, I recognize that there is a potential for that to happen since the look up and the save do not happen simultaneously. However, for the scope of this project I felt like this is a good first step to reduce the liklihood of two matching nonces being randomly generated.
 
 ##### Token consume:
 
@@ -93,7 +93,7 @@ Token.generate currently does a look up to see if a matching nonce has already b
 
 ### A question about multiple tokens
 
-This approach generates multiple valid tokens for each user. In some cases it might be best to restrict each user to one outstanding token. I'm curious about the preferred approach to this?
+This approach generates multiple valid tokens for each user. In some cases it might be best to restrict each user to one outstanding token. I'm curious about the preferred approach to this.
 
 ```
 def edit
